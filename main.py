@@ -1,10 +1,9 @@
-from doc_parser import load_documents, split_text
+from doc_parser import doc_parse
+
+DATA_PATH = "data"
 
 def main():
-    documents = load_documents()
-    chunks = split_text(documents)
+    chunks = doc_parse(DATA_PATH)
 
-    return chunks
-
-if "__name__" == "__main__":
+if __name__ == "__main__":
     main()

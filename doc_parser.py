@@ -1,11 +1,10 @@
-gitfrom langchain_community.document_loaders import DirectoryLoader
+from langchain_community.document_loaders import DirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.schema.document import Document
 
-DATA_PATH = "data"
 
-def load_documents():
-    loader = DirectoryLoader(DATA_PATH, glob="*.md")
+def load_documents(data_dir: str):
+    loader = DirectoryLoader(data_dir, glob="*.md")
     documents = loader.load()
     return documents
 
@@ -19,17 +18,15 @@ def split_text(documents: list[Document]):
     )
     
     chunks = text_splitter.split_documents(documents)
-    print(f"Split {len(documents)} documents into {5len(chunks)} chunks.")
+    print(f"Split {len(documents)} documents into {len(chunks)} chunks.")
 
     document = chunks[10]
     print(document.page_content)
     print(document.metadata)
     return chunks
 
-def main():
-    documents = load_documents()
+def doc_parse(data_dir: str):
+    documents = load_documents(data_dir)
     chunks = split_text(documents)
 
     return chunks
-
-main()
